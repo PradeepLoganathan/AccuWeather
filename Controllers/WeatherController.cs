@@ -1,3 +1,4 @@
+using AccuWeather.Models;
 using Microsoft.AspNetCore.Mvc;
 namespace AccuWeather.Controllers;
 
@@ -11,9 +12,9 @@ public class WeatherController:Controller
         _weatherRepository = weatherRepository;
         _weatherService    = weatherService;
     }
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        _weatherService.GetWeatherByCity("Singapore");
-        return View(_weatherRepository.GetAllWeather());
+        WeatherData weather = await _weatherService.GetWeatherByCity("Singapore");
+        return View(weather);
     }
 }

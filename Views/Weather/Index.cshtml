@@ -1,4 +1,4 @@
-@model IEnumerable<AccuWeather.Models.WeatherData>
+@model AccuWeather.Models.WeatherData
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,11 +28,9 @@
  </div>
 </form>  
 
-@foreach (var WeatherData in Model)
-{
-    <div>@WeatherData.Title</div>
-    <div>@WeatherData.Main.TempMax</div>
-    <div>@WeatherData.Main.TempMin</div>
-}
+<div>@Model.Main.Temperature</div>
+<div>@Model.Main.TempMax</div>
+<div>@Model.Main.TempMin</div>
+
 </body>
 </html>
