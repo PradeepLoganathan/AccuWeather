@@ -30,7 +30,8 @@ namespace AccuWeather.Controllers
         {
             if (ModelState.IsValid)
             {
-                WeatherData weather = await _weatherService.GetWeatherByCity(cityViewModel.City);
+                WeatherData weather = await _weatherService.GetWeatherByCity("Brisbane");
+                //WeatherData weather = await _weatherService.GetWeatherByCity(cityViewModel.City);
                 if (weather != null)
                     _weatherRepository.AddWeatherData(weather);
                 var SavedWeather = _weatherRepository.GetAllWeather();
