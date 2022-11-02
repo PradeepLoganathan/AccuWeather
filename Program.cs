@@ -1,10 +1,14 @@
+using AccuWeather.Models;
 using AccuWeather.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//add services
 builder.Services.AddHttpClient();
-builder.Services.AddSingleton<IWeatherRepository, WeatherRepository> ();
+builder.Services.AddSingleton<IWeatherRepository, WeatherRepository>();
 builder.Services.AddScoped<IWeatherService, WeatherService>();
 
+// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -17,10 +21,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
+
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.Run();

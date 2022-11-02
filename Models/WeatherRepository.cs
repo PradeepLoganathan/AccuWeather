@@ -2,27 +2,31 @@ using System.Collections.Generic;
 using System.Linq;
 using AccuWeather.Models;
 
-public class WeatherRepository : IWeatherRepository
+namespace AccuWeather.Models
 {
-    private List<WeatherData> _WeatherList; 
-
-    public WeatherRepository()
+    public class WeatherRepository : IWeatherRepository
     {
-        _WeatherList = new List<WeatherData>();
-    }
+        private List<WeatherData> _WeatherList;
 
-    public void AddWeatherData(WeatherData weatherData)
-    {
-        _WeatherList.Add(weatherData);
-    }
+        public WeatherRepository()
+        {
+            _WeatherList = new List<WeatherData>();
+        }
 
-    public IList<WeatherData> GetAllWeather()
-    {
-        return _WeatherList;
-    }
+        public void AddWeatherData(WeatherData weatherData)
+        {
+            int index = _WeatherList.FindIndex(x => x.Id == weatherData.Id);
+            if(index == -1)
+                _WeatherList.Add(weatherData);
+            else
+            _WeatherList[index] = weatherData;
+        }
 
-    public WeatherData GetWeatherByID(int ID)
-    {
-        return _WeatherList.FirstOrDefault( w => w.Id == ID);
+        public IList<WeatherData> GetAllWeather()
+        {
+            return _WeatherList;
+        }
+
+        public WeatherData GetWeatherByID(int ID) => _WeatherList.FirstOrDefault(w => w.Id == ID);
     }
 }

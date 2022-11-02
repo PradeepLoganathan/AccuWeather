@@ -1,8 +1,9 @@
-using AccuWeather.Models;
-
-public interface IWeatherRepository
+namespace AccuWeather.Models
 {
-    public void AddWeatherData(WeatherData weatherData);
-    public IList<WeatherData> GetAllWeather();
-    public WeatherData GetWeatherByID(int ID);
+    public interface IWeatherRepository
+    {
+        public void AddWeatherData(WeatherData weatherData);
+        public IList<WeatherData> GetAllWeather();
+        public WeatherData GetWeatherByID(int ID);
+    }
 }

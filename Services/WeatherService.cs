@@ -29,6 +29,8 @@ public class WeatherService: IWeatherService
                 var content = await httpResponseMessage.Content.ReadAsStringAsync();
                 weatherData = JsonConvert.DeserializeObject<WeatherData>(content);
             }
+            else
+                weatherData = null;
         }
         catch (System.Exception)
         {
