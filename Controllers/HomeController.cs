@@ -20,6 +20,8 @@ namespace AccuWeather.Controllers
 
         public IActionResult Index()
         {
+            var SavedWeather = _weatherRepository.GetAllWeather();
+            ViewBag.Weathers = SavedWeather;
             return View();
         }
 
@@ -45,7 +47,7 @@ namespace AccuWeather.Controllers
                 
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
         {
             return View();
         }
