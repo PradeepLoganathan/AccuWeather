@@ -1,4 +1,5 @@
-﻿using AccuWeather.ViewModels;
+﻿using AccuWeather.Models;
+using AccuWeather.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AccuWeather.Controllers
@@ -19,12 +20,18 @@ namespace AccuWeather.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(CityViewModel cityViewModel)
+        public async Task<IActionResult> Index([Bind("City")] CityViewModel cityViewModel)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                WeatherData weather = await _weatherService.GetWeatherByCity("Singapore");
+                return View(weather);
+                //return View();
+            }
+            else
+                return View();
         }
 
-        //WeatherData weather = await _weatherService.GetWeatherByCity("Singapore");
-        //    return View(weather);
+        
     }
 }
