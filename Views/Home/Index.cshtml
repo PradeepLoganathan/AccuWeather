@@ -31,20 +31,21 @@
         {
           
                 <div class="col">
-                <div class="card h-100">
+                <div class="card border-success mb-3">
                             @*<img src="http://openweathermap.org/img/wn/10d@2x.png" class="card-img-top" alt=@weather.Title>*@
                     <div class="card-body">
                         <h5 class="card-title">@weather.Title</h5>
                                 <p class="card-text">Current Temperature - @weather.Main.Temperature, Feels Like - @weather.Main.Percepita</p>
                         <p class="card-text"></p>
-                        <p class="card-text">Max: @weather.Main.TempMax C, Min: @weather.Main.TempMin C </p>
+                        <p class="card-text">Max: @weather.Main.TempMax C, Min: @weather.Main.TempMin C, Humidity: @weather.Main.Humidity </p>
+                        <p class="card-text">Wind speed: @weather.Wind.Speed km/h</p>
                         @foreach (var item in weather.Weather)
                         {
                             <p class="card-text"> @item.Description </p> 
                         }
                     </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
+                    <div class="card-footer" style="background-color:#5bc0de;text-align:center;">
+                        <small class="text-muted">Last updated less than 3 mins ago</small>
                     </div>
                 </div>
             </div> 
