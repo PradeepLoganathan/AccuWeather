@@ -25,16 +25,16 @@ spec:
   providesApis:
    - LoanApplication-api
   lifecycle: alpha
-  owner: demo-team
-  system: ModernLoansManager
+  owner: Loans-DomainTeam
+  system: Loans-System
 
 ---
 
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: demo-app-ms-2
-  description: Demo Application's Microservice-2
+  name: Loan-Pricing-Service
+  description: This microservice determines loan pricing based on various factors, such as risk assessments, interest rates, term durations, and market conditions.
   tags:
     - microservice
   annotations:
@@ -43,7 +43,7 @@ metadata:
 spec:
   type: service
   consumesApis:
-   - demo-api
+   - Loan-Origination-Service
   lifecycle: alpha
   owner: Loans-DomainTeam
   system: Loans-System
@@ -58,7 +58,7 @@ metadata:
   annotations:
     'backstage.io/techdocs-ref': dir:.
 spec:
-  owner: demo-team
+  owner: Loans-DomainTeam
   domain: Loans-domain
 
 ---
@@ -75,7 +75,7 @@ metadata:
 spec:
   type: openapi
   lifecycle: experimental
-  owner: demo-team
+  owner: Loans-DomainTeam
   system: Loans-System # Or specify system name of your choice
   definition: |
     openapi: 3.0.1
