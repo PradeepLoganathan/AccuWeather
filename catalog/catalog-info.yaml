@@ -84,7 +84,7 @@ spec:
       description: defaultDescription
       version: '0.1'
     servers:
-      - url: https://api.agify.io
+      - url: https://api.mybank.io
     paths:
       /:
         get:
