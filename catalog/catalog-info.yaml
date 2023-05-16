@@ -1,13 +1,105 @@
 apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: Loans-domain
+  description: This domain focuses on managing loan products, loan application processes, loan origination, loan servicing, repayment schedules, and interest calculations.
+  annotations:
+    'backstage.io/techdocs-ref': dir:.
+spec:
+  owner: Loans-DomainTeam
+
+---
+
+apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: AccuWeather
-  description: Accurate Weather App - This App provides accurate weather information
+  name: Loan-Origination-Service
+  description: This microservice is responsible for handling the loan application process, including capturing applicant information, performing credit checks, evaluating eligibility, and generating loan offers.
   tags:
-    - weather-app
+    - microservice
   annotations:
-   "backstage.io/kubernetes-label-selector": "app.kubernetes.io/part-of=accuweather"
+    'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=demo-app-ms-1'
+    'backstage.io/techdocs-ref': dir:.
 spec:
   type: service
-  lifecycle: prototype
-  owner: default-team
+  providesApis:
+   - LoanApplication-api
+  lifecycle: alpha
+  owner: demo-team
+  system: ModernLoansManager
+
+---
+
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: demo-app-ms-2
+  description: Demo Application's Microservice-2
+  tags:
+    - microservice
+  annotations:
+    'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=demo-app-ms-2'
+    'backstage.io/techdocs-ref': dir:.
+spec:
+  type: service
+  consumesApis:
+   - demo-api
+  lifecycle: alpha
+  owner: Loans-DomainTeam
+  system: Loans-System
+
+---
+
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: Loans-System
+  description: This system is responsible for handling the loan lifecycle process, including capturing applicant information, performing credit checks, evaluating eligibility, and generating loan offers.
+  annotations:
+    'backstage.io/techdocs-ref': dir:.
+spec:
+  owner: demo-team
+  domain: Loans-domain
+
+---
+
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: LoanApplication-api
+  description: This API allows external systems or channels (such as a mobile app or web application) to submit loan applications by providing applicant information, loan amount, desired terms, and other relevant details.
+  links:
+    - url: https://api.agify.io
+      title: API Definition
+      icon: docs
+spec:
+  type: openapi
+  lifecycle: experimental
+  owner: demo-team
+  system: Loans-System # Or specify system name of your choice
+  definition: |
+    openapi: 3.0.1
+    info:
+      title: Demo API
+      description: defaultDescription
+      version: '0.1'
+    servers:
+      - url: https://api.agify.io
+    paths:
+      /:
+        get:
+          description: Auto generated using Swagger Inspector
+          parameters:
+            - name: name
+              in: query
+              schema:
+                type: string
+              example: type_any_name
+          responses:
+            '200':
+              description: Auto generated using Swagger Inspector
+              content:
+                application/json; charset=utf-8:
+                  schema:
+                    type: string
+                  examples: {}
