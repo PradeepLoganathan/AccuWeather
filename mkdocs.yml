@@ -1,8 +1,4 @@
-site_name: 'SurfersLookout Frontend'
-repo_url: https://github.com/PradeepLoganathan/AccuWeather
-repo_name: Github
-edit_uri: blob/main/docs/
-docs_dir: docs
+site_name: 'My Banking System'
 nav:
   - Home: index.md
   - Tasks: tasks.md
